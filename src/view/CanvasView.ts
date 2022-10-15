@@ -23,9 +23,28 @@ export class CanvasView {
   }
 
   // No entiendo esta función :c
+  // Retorna un void
+  // Recibe un parámetro que es una función (Callback), esta función recibe un parámetro de tipo 
+  // CanvasView, y retorna un void
   initStartButton(startFunction: (view: CanvasView) => void): void {
     this.start?.addEventListener("click", () => startFunction(this));
   }
 
-  drawScore(score: number): void {}
+  drawScore(score: number): void {
+    if(this.scoreDisplay) this.scoreDisplay.innerHTML = score.toString()
+  }
+
+  drawInfo(info: string): void {
+    if(this.info) this.info.innerHTML = info;
+  }
+
+  drawSprite(brick: Brick): void {
+    if(!brick) return;
+
+    this.context?.drawImage(brick.image, brick.pos.x, brick.pos.y, brick.width, brick.height);
+  }
+
+  drawBricks(bricks: Brick[]): void {
+    bricks.forEach(brick => this.drawSprite(brick))
+  }
 }
